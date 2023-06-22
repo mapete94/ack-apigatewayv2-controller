@@ -101,6 +101,11 @@ resources:
           in:
             - AVAILABLE
   ApiMapping:
+    fields:
+      ApiId:
+        references:
+          resource: API
+          path: Status.APIID
     tags:
       ignore: true
   DomainName:

@@ -156,6 +156,11 @@ func (in *APIMappingSpec) DeepCopyInto(out *APIMappingSpec) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIRef != nil {
+		in, out := &in.APIRef, &out.APIRef
+		*out = new(corev1alpha1.AWSResourceReferenceWrapper)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DomainName != nil {
 		in, out := &in.DomainName, &out.DomainName
 		*out = new(string)

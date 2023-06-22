@@ -24,10 +24,9 @@ import (
 //
 // Represents an API mapping.
 type APIMappingSpec struct {
-
-	// +kubebuilder:validation:Required
-	APIID         *string `json:"apiID"`
-	APIMappingKey *string `json:"apiMappingKey,omitempty"`
+	APIID         *string                                  `json:"apiID,omitempty"`
+	APIMappingKey *string                                  `json:"apiMappingKey,omitempty"`
+	APIRef        *ackv1alpha1.AWSResourceReferenceWrapper `json:"apiRef,omitempty"`
 	// +kubebuilder:validation:Required
 	DomainName *string `json:"domainName"`
 	// +kubebuilder:validation:Required

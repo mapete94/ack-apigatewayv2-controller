@@ -23,6 +23,8 @@ AUTHORIZER_RESOURCE_PLURAL = 'authorizers'
 ROUTE_RESOURCE_PLURAL = 'routes'
 STAGE_RESOURCE_PLURAL = 'stages'
 VPC_LINK_RESOURCE_PLURAL = 'vpclinks'
+DOMAIN_NAME_RESOURCE_PLURAL = 'domainnames'
+API_MAPPING_RESOURCE_PLURAL = 'apimappings'
 
 
 def api_ref_and_data(api_resource_name: str, replacement_values: dict, file_name: str = "httpapi"):

@@ -57,6 +57,9 @@ func newResourceDelta(
 			delta.Add("Spec.APIMappingKey", a.ko.Spec.APIMappingKey, b.ko.Spec.APIMappingKey)
 		}
 	}
+	if !reflect.DeepEqual(a.ko.Spec.APIRef, b.ko.Spec.APIRef) {
+		delta.Add("Spec.APIRef", a.ko.Spec.APIRef, b.ko.Spec.APIRef)
+	}
 	if ackcompare.HasNilDifference(a.ko.Spec.DomainName, b.ko.Spec.DomainName) {
 		delta.Add("Spec.DomainName", a.ko.Spec.DomainName, b.ko.Spec.DomainName)
 	} else if a.ko.Spec.DomainName != nil && b.ko.Spec.DomainName != nil {
