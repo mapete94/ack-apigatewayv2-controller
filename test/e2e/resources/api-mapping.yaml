@@ -1,0 +1,8 @@
+apiVersion: apigatewayv2.services.k8s.aws/v1alpha1
+kind: ApiMapping
+metadata:
+  name: $API_MAPPING_NAME
+spec:
+  apiID: $API_ID
+  domainName: $DOMAIN_NAME
+  stage: $STAGE_NAME

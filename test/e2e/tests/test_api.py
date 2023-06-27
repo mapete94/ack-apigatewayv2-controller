@@ -175,6 +175,26 @@ def stage_resource(route_resource):
     k8s.delete_custom_resource(stage_ref)
 
 
+@pytest.fixture(scope="module")
+def domain_name_resource():
+    domain_resource_name = random_suffix_name(test_resource_values['DOMAIN_NAME'], 10)
+    test_resource_values['DOMAIN_NAME'] = domain_resource_name + "ack-test.com"
+    domain_ref, domain_data = helper.domain_name_data(domain_resource_name=domain_resource_name,
+                                                      replacement_values=test_resource_values)
+    logging.debug(f"apigatewayv2 domain resource. name: {domain_resource_name}, data: {domain_data}")
+
+    k8s.create_custom_resource(domain_ref, domain_data)
+    time.sleep(CREATE_WAIT_AFTER_SECONDS)
+    assert k8s.wait_on_condition(domain_ref, "ACK.ResourceSynced", "True", wait_periods=10)
+
+    cr = k8s.get_resource(domain_ref)
+    assert cr is not None
+
+    yield domain_ref, cr
+
+    k8s.delete_custom_resource(domain_ref)
+
+
 @service_marker
 @pytest.mark.canary
 class TestApiGatewayV2:

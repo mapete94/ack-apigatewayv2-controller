@@ -118,6 +118,19 @@ def vpc_link_ref_and_data(vpc_link_resource_name: str, replacement_values: dict,
     return ref, resource_data
 
 
+def domain_name_data(domain_resource_name: str, replacement_values: dict, file_name: str = "domain-name"):
+    ref = resource.CustomResourceReference(
+        CRD_GROUP, CRD_VERSION, DOMAIN_NAME_RESOURCE_PLURAL,
+        domain_resource_name, namespace="default",
+    )
+
+    resource_data = load_apigatewayv2_resource(
+        file_name,
+        additional_replacements=replacement_values,
+    )
+    return ref, resource_data
+
+
 class ApiGatewayValidator:
 
     def __init__(self, apigatewayv2_client):

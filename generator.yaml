@@ -110,22 +110,12 @@ resources:
       ignore: true
   DomainName:
     fields:
-      Name:
-        is_primary_key: true
-    renames:
-      operations:
-        CreateDomainName:
-          input_fields:
-            DomainName: Name
-        GetDomainName:
-          input_fields:
-            DomainName: Name
-        DeleteDomainName:
-          input_fields:
-            DomainName: Name
-        DescribeDomainName:
-          input_fields:
-            DomainName: Name
+      domainNameConfigurations:
+        apiGatewayDomainName:
+          is_required: true
+        certificateARN:
+          is_required: true
+
 
 operations:
   CreateApi:
