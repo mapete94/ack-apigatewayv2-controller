@@ -4,3 +4,6 @@ metadata:
   name: $DOMAIN_NAME
 spec:
   name: $DOMAIN_NAME
+  domainNameConfigurations:
+    apiGatewayDomainName: $DOMAIN_NAME
+    certificateARN: $CERTIFICATE_ARN

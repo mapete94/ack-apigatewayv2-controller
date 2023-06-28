@@ -179,8 +179,8 @@ def stage_resource(route_resource):
 def domain_name_resource():
     domain_resource_name = random_suffix_name(test_resource_values['DOMAIN_NAME'], 10)
     test_resource_values['DOMAIN_NAME'] = domain_resource_name + "ack-test.com"
-    domain_ref, domain_data = helper.domain_name_data(domain_resource_name=domain_resource_name,
-                                                      replacement_values=test_resource_values)
+    domain_ref, domain_data = helper.domain_name_ref_and_data(domain_resource_name=domain_resource_name,
+                                                              replacement_values=test_resource_values)
     logging.debug(f"apigatewayv2 domain resource. name: {domain_resource_name}, data: {domain_data}")
 
     k8s.create_custom_resource(domain_ref, domain_data)
@@ -193,6 +193,26 @@ def domain_name_resource():
     yield domain_ref, cr
 
     k8s.delete_custom_resource(domain_ref)
+
+
+@pytest.fixture(scope="module")
+def api_mapping_resource(domain_name_resource, api_resource):
+    api_mapping_name = random_suffix_name(test_resource_values['API_MAPPING_NAME'], 10)
+    test_resource_values['API_MAPPING_NAME'] = api_mapping_name
+    api_mapping_ref, api_mapping_data = helper.api_mapping_ref_and_data(api_mapping_name=api_mapping_name,
+                                                                        replacement_values=test_resource_values)
+    logging.debug(f"apigatewayv2 api mapping resource. name: {api_mapping_name}, data: {api_mapping_data}")
+
+    k8s.create_custom_resource(api_mapping_ref, api_mapping_data)
+    time.sleep(CREATE_WAIT_AFTER_SECONDS)
+    assert k8s.wait_on_condition(api_mapping_ref, "ACK.ResourceSynced", "True", wait_periods=10)
+
+    cr = k8s.get_resource(api_mapping_ref)
+    assert cr is not None
+
+    yield api_mapping_ref, cr
+
+    k8s.delete_custom_resource(api_mapping_ref)
 
 
 @service_marker

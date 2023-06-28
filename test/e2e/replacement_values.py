@@ -22,6 +22,7 @@ REPLACEMENT_VALUES = {
     "IMPORT_API_TITLE": "ack-test-import-api",
     "API_ID": "api_id",
     "DOMAIN_NAME": "subdomain",
+    "CERTIFICATE_ARN": "certificate_arn",
     "INTEGRATION_NAME": "ack-test-integration",
     "INTEGRATION_URI": "https://httpbin.org/get",
     "AUTHORIZER_NAME": "ack-test-authorizer",
