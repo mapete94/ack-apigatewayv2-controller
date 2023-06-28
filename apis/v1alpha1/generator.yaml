@@ -112,6 +112,8 @@ resources:
     fields:
       Name:
         is_primary_key: true
+      domainNameConfigurations:
+        is_required: true
     renames:
       operations:
         CreateDomainName:
@@ -130,3 +132,4 @@ resources:
 operations:
   CreateApi:
     custom_implementation: customCreateApi
+

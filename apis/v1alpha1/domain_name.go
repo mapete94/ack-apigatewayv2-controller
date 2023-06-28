@@ -24,7 +24,9 @@ import (
 //
 // Represents a domain name.
 type DomainNameSpec struct {
-	DomainNameConfigurations []*DomainNameConfiguration    `json:"domainNameConfigurations,omitempty"`
+
+	// +kubebuilder:validation:Required
+	DomainNameConfigurations []*DomainNameConfiguration    `json:"domainNameConfigurations"`
 	MutualTLSAuthentication  *MutualTLSAuthenticationInput `json:"mutualTLSAuthentication,omitempty"`
 	// +kubebuilder:validation:Required
 	Name *string            `json:"name"`

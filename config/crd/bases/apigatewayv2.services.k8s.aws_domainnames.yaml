@@ -95,6 +95,7 @@ spec:
                   type: string
                 type: object
             required:
+            - domainNameConfigurations
             - name
             type: object
           status:
