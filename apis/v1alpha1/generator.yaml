@@ -116,6 +116,9 @@ resources:
         is_required: true
     renames:
       operations:
+        UpdateDomainName:
+          input_fields:
+            DomainName: Name
         CreateDomainName:
           input_fields:
             DomainName: Name

@@ -404,6 +404,11 @@ func (rm *resourceManager) sdkUpdate(
 	} else {
 		ko.Status.APIMappingSelectionExpression = nil
 	}
+	if resp.DomainName != nil {
+		ko.Spec.Name = resp.DomainName
+	} else {
+		ko.Spec.Name = nil
+	}
 	if resp.DomainNameConfigurations != nil {
 		f2 := []*svcapitypes.DomainNameConfiguration{}
 		for _, f2iter := range resp.DomainNameConfigurations {
@@ -481,6 +486,9 @@ func (rm *resourceManager) newUpdateRequestPayload(
 ) (*svcsdk.UpdateDomainNameInput, error) {
 	res := &svcsdk.UpdateDomainNameInput{}
 
+	if r.ko.Spec.Name != nil {
+		res.SetDomainName(*r.ko.Spec.Name)
+	}
 	if r.ko.Spec.DomainNameConfigurations != nil {
 		f1 := []*svcsdk.DomainNameConfiguration{}
 		for _, f1iter := range r.ko.Spec.DomainNameConfigurations {
